@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state ={
+      locData:'',
+      errMsg:'',
+      displayErrMsg: false,
+      displayMap:false
+    }
+  }
+  getLocation = async(event) =>{
+    event.preventDefault();
+    let seachQuery = event.target.searchQuery.value;
+    let locURL = `https://us1.locationiq.com/v1/search.php?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&q=${seachQuery}&format=json`;
+    try {
+      let locResult = await axios.get(locURL);
+      console.log(locResult.data);
+      this.setState({
+        locData:locResult.data[0],
+        displayMap:true
+      })
+    }
+    catch {
+      this.setState({
+        errMsg: 'Unable to geocode',
+        displayErrMsg:true
+      })
+    }
+    
+  }
+
+  render(){
+    return(
+      <div>
+        <h1>React axios app</h1>
+        {/* <button onClick={this.getLocation}>search</button> */}
+        <form onSubmit={this.getLocation}>
+          <input type='text' placeholder='city name' name='searchQuery' />
+          <input type='submit' value='explore' />
+        </form>
+        <p>{this.state.locData.display_name}</p>
+        <p>{this.state.locData.lon}</p>
+        <p>{this.state.locData.lat}</p>
+        {this.state.displayMap &&  <img src={`https://maps.locationiq.com/v3/staticmap?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&center=${this.state.locData.lat},${this.state.locData.lon}`} alt='map'/> }
+        { this.state.displayErrMsg && this.state.errMsg}
+      </div>
+    )
+  }
 }
 
 export default App;
