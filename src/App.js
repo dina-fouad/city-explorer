@@ -5,7 +5,7 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state ={
-      locData:'',
+      Data:'',
       errMsg:'',
       displayErrMsg: false,
       displayMap:false
@@ -19,7 +19,7 @@ class App extends React.Component{
       let locResult = await axios.get(locURL);
       console.log(locResult.data);
       this.setState({
-        locData:locResult.data[0],
+        Data:locResult.data[0],
         displayMap:true
       })
     }
@@ -41,10 +41,10 @@ class App extends React.Component{
           <input type='text' placeholder='city name' name='searchQuery' />
           <input type='submit' value='explore' />
         </form>
-        <p>{this.state.locData.display_name}</p>
-        <p>{this.state.locData.lon}</p>
-        <p>{this.state.locData.lat}</p>
-        {this.state.displayMap &&  <img src={`https://maps.locationiq.com/v3/staticmap?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&center=${this.state.locData.lat},${this.state.locData.lon}`} alt='map'/> }
+        <p>{this.state.Data.display_name}</p>
+        <p>{this.state.Data.lon}</p>
+        <p>{this.state.Data.lat}</p>
+        {this.state.displayMap &&  <img src={`https://maps.locationiq.com/v3/staticmap?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&center=${this.state.Data.lat},${this.state.Data.lon}`} alt='map'/> }
         { this.state.displayErrMsg && this.state.errMsg}
       </div>
     )
