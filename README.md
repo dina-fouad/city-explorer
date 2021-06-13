@@ -98,3 +98,10 @@ Start time: 2:30
 Finish time: 4:40
 Actual time needed to complete: 2
 
+![](dsd.png)
+
+## trello 
+https://trello.com/b/BQQU07LZ/axios
+
+## Netfliy
+https://dinaclass6.netlify.app/
