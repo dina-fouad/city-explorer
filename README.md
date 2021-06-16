@@ -85,16 +85,14 @@ useing React and axios
 axios React JS
 
 
-## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
-
 
 Name of feature:react and axios
 
-Estimate of time needed to complete: 2:30h
+Estimate of time needed to complete: 5h
 
-Start time: 2:30
+Start time: 2:00
 
-Finish time: 4:40
-Actual time needed to complete: 2
+Finish time: 8:30
+Actual time needed to complete: 7
 
+https://trello.com/b/BQQU07LZ/axios
