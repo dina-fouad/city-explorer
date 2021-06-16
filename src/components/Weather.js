@@ -4,12 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Weather extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         weatherArray: this.props.weatherData
-    //     }
-    // }
 
     render() {
         return (
@@ -19,26 +13,27 @@ class Weather extends React.Component {
 
                     <ListGroup>
 
-                        <ListGroup.Item action variant="success">
+                        <ListGroup.Item >
                             {this.props.weatherData[0].date} <br></br>
                             {this.props.weatherData[0].description}
                         </ListGroup.Item>
-                        <ListGroup.Item action variant="danger">
+                        <ListGroup.Item >
                             {this.props.weatherData[1].date} <br></br>
                             {this.props.weatherData[1].description}
                         </ListGroup.Item>
-                        <ListGroup.Item action variant="warning">
+                        <ListGroup.Item>
                             {this.props.weatherData[2].date} <br></br>
                             {this.props.weatherData[2].description}
                         </ListGroup.Item>
 
                     </ListGroup>
+
                 }
                 {this.props.showWeather == false &&
 
                     <ListGroup>
 
-                        <ListGroup.Item action variant="danger">
+                        <ListGroup.Item >
                             {this.props.weatherData.data}
                         </ListGroup.Item>
 
@@ -51,3 +46,4 @@ class Weather extends React.Component {
 }
 
 export default Weather;
+

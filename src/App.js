@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Weather from './components/Weather.js';
 import Movies from './components/Movies';
+import Alert from 'react-bootstrap/Alert';
 
 
 class App extends React.Component {
@@ -14,32 +15,30 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchQuery: '',
-      cityData: '',
+      locationData: '',
+      latitude: '',
+      longitude: '',
       displayMap: false,
       errorMessage: false,
       errorCode: '',
       weatherItem: [],
       showWeather: false,
-      latitude: '',
-      longitude: '',
       moviesArr: [],
       showMovies: false
     }
   }
 
-  getCity = async (event) => {
+  getLocation = async (event) => {
     event.preventDefault();
     let serverRoute = process.env.REACT_APP_SERVER;
     // const url = `http://localhost:3065/weather?city=amman&lon=35.9239625&lat=31.9515694`;
-    let cityUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&q=${this.state.searchQuery}&format=json`;
+    let locationUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&q=${this.state.searchQuery}&format=json`;
 
     try {
 
-
-
-      let cityResult = await axios.get(cityUrl);
+      let cityResult = await axios.get(locationUrl);
       this.setState({
-        cityData: cityResult.data[0],
+        locationData: cityResult.data[0],
         displayMap: true,
         errorMessage: false,
         latitude: cityResult.data[0].lat,
@@ -105,7 +104,7 @@ class App extends React.Component {
       <>
         <h1>City Explorer</h1>
 
-        <Form onSubmit={this.getCity}>
+        <Form onSubmit={this.getLocation}>
           <Form.Group controlId="formBasicEmail">
             <Form.Control type="text" placeholder="Enter City Name" onChange={this.updateSearchQuery} />
           </Form.Group>
@@ -115,19 +114,27 @@ class App extends React.Component {
         </Form>
 
         {this.state.displayMap &&
-
           <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&center=${this.state.cityData.lat},${this.state.cityData.lon}`} />
+            <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=pk.b5c1fd2f37c40bd3df773b1b16f2cf35&center=${this.state.locationData.lat},${this.state.locationData.lon}`} />
             <Card.Body>
-              <Card.Title>{this.state.cityData.display_name}</Card.Title>
+              
+              <Card.Title>{this.state.locationData.display_name}</Card.Title>
               <Card.Text>
-                {this.state.cityData.lat} 
-                {this.state.cityData.lon}
+                {this.state.locationData.lat} 
+                {this.state.locationData.lon}
               </Card.Text>
             </Card.Body>
           </Card>
         }
+   
+   
+        {this.state.errorMessage &&
 
+        <Alert variant="danger">
+         Please Write Another City Name, Error Code:
+       {this.state.errorCode.response.status}
+       </Alert>
+         }
     
         {this.state.displayMap &&
           <Weather weatherData={this.state.weatherItem} showWeather={this.state.showWeather}></Weather>}
