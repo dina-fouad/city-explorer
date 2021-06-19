@@ -70,7 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-# branch2
+# class7
 
 **Author**: dina albarghouthi
 **Version**: 1.0.0 
@@ -85,8 +85,6 @@ useing React and axios
 axios React JS
 
 
-## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
 
 Name of feature:react and axios
